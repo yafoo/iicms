@@ -1,0 +1,53 @@
+{extend name="common/public"/}
+{block name="content"}
+<div class="am-g">
+    <div class="am-u-sm-12">
+        <section class="am-panel am-panel-default am-animation-scale-up am-none" id="ed">
+            <header class="am-panel-hd">
+                <h3 class="am-panel-title">
+                    <button class="am-btn am-btn-primary am-btn-xs am-radius am-fr am-icon-remove" id="mybtn3"> 关闭</button>
+                    <button data-ajax="#ed-auth" class="am-btn am-btn-primary am-btn-xs am-radius am-fr am-icon-check"> 保存</button>
+                    <i class="am-icon-plus"></i> 编辑菜单
+                </h3>
+            </header>
+            <div class="am-panel-bd">
+                <form action="http://www.kongqi.com/admin/setting/save_auth.html" id="ed-auth" method="POST" autocomplete="off" role="form" class="am-form am-form-horizontal">
+                    <input type="hidden" name="pid" value="0">
+                    <input type="hidden" name="id" value="">
+                    <div class="am-form-group">
+                        <label for="name" class="am-u-sm-3 am-form-label">名称</label>
+                        <div class="am-u-sm-9">
+                            <input type="text" name="name" id="name" placeholder="输入菜单名称">
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="title" class="am-u-sm-3 am-form-label">别名</label>
+                        <div class="am-u-sm-9">
+                            <input type="text" name="title" id="title" placeholder="菜单显示名称">
+                        </div>
+                    </div>
+                     <div class="am-form-group">
+                        <label for="icon" class="am-u-sm-3 am-form-label">图标</label>
+                        <div class="am-u-sm-9">
+                            <input type="text" name="icon" id="icon" placeholder="输入图标，amazeui图标">
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="sort" class="am-u-sm-3 am-form-label">排序</label>
+                        <div class="am-u-sm-9">
+                            <input type="text" name="sort" id="sort" placeholder="菜单显示名称">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>
+{/block}
+{block name="js"}
+<script type="text/javascript">
+	//$("#mybtn3").click(function(){window.parent.popHide();$("#mybtn1",window.parent.window.frames["main"].document).click();});
+	//var btn1 = $("#mybtn1",window.parent.window.frames["main"].document);
+	//$("#mybtn3").click(function(){window.parent.popHide();btn1.click();});
+</script>
+{/block}

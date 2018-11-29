@@ -1,0 +1,83 @@
+{extend name="common/public"/}
+{block name="content"}
+<div class="am-index-avg">
+    <ul class="am-avg-sm-4">
+        <li class="am-padding-sm">
+            <div class="am-btn am-btn-primary am-btn-block am-text-left">
+                <span class="am-fr am-padding-right-lg">主题</span>
+                <span class="am-icon-comments-o am-margin-left-lg"></span>
+            </div>
+        </li>
+        <li class="am-padding-sm">
+            <div class="am-btn am-btn-secondary am-btn-block am-text-left">
+                <span class="am-fr am-padding-right-lg">主题</span>
+                <span class="am-icon-comments-o am-margin-left-lg"></span>
+            </div>
+        </li>
+        <li class="am-padding-sm">
+            <div class="am-btn am-btn-success am-btn-block am-text-left">
+                <span class="am-fr am-padding-right-lg">主题</span>
+                <span class="am-icon-comments-o am-margin-left-lg"></span>
+            </div>
+        </li>
+        <li class="am-padding-sm">
+            <div class="am-btn am-btn-warning am-btn-block am-text-left">
+                <span class="am-fr am-padding-right-lg">主题</span>
+                <span class="am-icon-comments-o am-margin-left-lg"></span>
+            </div>
+        </li>
+    </ul>
+</div>
+<section class="am-panel am-panel-default">
+    <div class="am-panel-bd">
+    	<div class="am-btn am-btn-primary" id="mybtn1">打开父窗口pop</div>
+    	<div class="am-btn am-btn-primary" id="mybtn2">打开父窗口dialog</div>
+    </div>
+</section>
+
+<div class="am-g">
+    <div class="am-u-sm-12 am-u-md-6 am-padding-right-sm">
+        <section class="am-panel am-panel-default">
+            <div class="am-panel-bd">
+                <div class="am-tabs" data-am-tabs="{noSwipe: 1}" id="doc-tab-demo-1">
+                    <ul class="am-tabs-nav am-nav am-nav-tabs">
+                        <li class="am-active"><a href="javascript: void(0)">待审核主题</a></li>
+                        <li><a href="javascript: void(0)">待审核评论</a></li>
+                        <li><a href="javascript: void(0)">待审核用户</a></li>
+                    </ul>
+
+                    <div class="am-tabs-bd">
+                        <div class="am-tab-panel am-active">
+                            <div></div>
+                        </div>
+                        <div class="am-tab-panel">
+                            ...
+                        </div>
+                        <div class="am-tab-panel">
+                            ...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="am-u-sm-12 am-u-md-6 am-padding-left-sm">
+        <section class="am-panel am-panel-default">
+            <div class="am-panel-bd"><i class="am-icon-info-circle"></i> 系统信息</div>
+            <ul class="am-list am-list-static">
+                <li>iicms 程序版本：v1.0</li>
+                <li>ThinkPHP版本：{$wel.tp_v}</li>
+                <li>服务器系统及 PHP：{$Think.const.PHP_OS} / PHP-{:phpversion()}</li>
+                <li>服务器软件：{$_SERVER['SERVER_SOFTWARE']}</li>
+                <li>服务器 MySQL 版本：{$wel.sql_v}</li>
+                <li>上传许可：{:ini_get('upload_max_filesize')}</li>
+            </ul>
+        </section>
+    </div>
+</div>
+
+
+
+
+{/block}

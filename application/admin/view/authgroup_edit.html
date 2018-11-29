@@ -1,0 +1,27 @@
+{extend name="common/public"/}
+{block name="content"}
+<div class="am-g">
+	<form method="post" class="am-form am-u-sm-12 admin-form">
+		<table class="am-table">
+		<tbody>
+			<tr>
+				<td style="width:100px;">用户组名:</td><td><input type="text" name="title" value="{$row.title|htmlspecialchars}"></td>
+			</tr>
+			<tr>
+				<td>组成员:</td><td><input type="text" name="users" value="{$row.users}"></td>
+			</tr>
+			<tr>
+				<td>状态:</td>
+				<td>
+					<label class="am-radio-inline"><input type="radio" name="state" value="1" {eq name="row.state" value="1"}checked{/eq}> 正常</label>
+					<label class="am-radio-inline"><input type="radio" name="state" value="0" {eq name="row.state" value="0"}checked{/eq}> 关闭</label>
+				</td>
+			</tr>
+			<tr>
+				<td></td><td><input type="submit" name="" value="提 交" class="am-btn am-btn-primary am-btn-sm"></td>
+			</tr>
+    	</tbody>
+		</table>
+	</form>
+</div>
+{/block}

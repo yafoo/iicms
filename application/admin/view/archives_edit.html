@@ -1,0 +1,76 @@
+{extend name="common/public"/}
+{block name="content"}
+<div class="am-g">
+  <form method="post" class="am-form am-u-sm-12 admin-form" enctype="multipart/form-data">
+  	<input type="hidden" name="channel" value="{$row.channel}">
+		<table class="am-table">
+		<tbody>
+			<tr>
+				<td style="width:100px;">文档标题:</td><td><input type="text" name="title" id="title" value="{$row.title}"></td>
+			</tr>
+			<tr>
+				<td>FLAG:</td>
+				<td>
+					{volist name="flags" id="vo"}
+					<label class="am-checkbox-inline"><input type="checkbox" name="flag[]" value="{$key}" {php}if($row['flag'] & $vo[0]) echo 'checked="checked"';{/php}> {$vo[1]}[{$key}]</label>
+					{/volist}
+			  </td>
+			</tr>
+			<tr>
+				<td>所属栏目:</td>
+				<td>
+					<select name="typeid" id="typeid">
+		      	{volist name="typelist" id="vo"}
+		        <option value="{$vo.id}" {eq name="vo.id" value="$row.typeid"}selected{/eq}>{for start="2" end="$vo.level"}　{/for}{gt name="vo.level" value="1"}├─{/gt}{$vo.typename}</option>
+		        {/volist}
+		      </select>
+				</td>
+			</tr>
+			<tr>
+				<td>作者:</td><td><input type="text" name="writer" id="writer" value="{$row.writer}"></td>
+			</tr>
+			<tr>
+				<td>来源:</td><td><input type="text" name="source" id="source" value="{$row.source}"></td>
+			</tr>
+			<tr>
+				<td>关键词:</td><td><input type="text" name="keywords" id="keywords" value="{$row.keywords}"></td>
+			</tr>
+			<tr>
+				<td>文档简介:</td><td><textarea name="description" rows="3" id="description">{$row.description}</textarea></td>
+			</tr>
+			<tr>
+				<td>原缩略图:</td>
+				<td>
+					{$row.litpic?'<img src="'.$row.litpic.'" style="width:150px;border:1px solid #ccc;margin-right:1em;"/>':''}<span style="color:red;">注意：添加新缩略图后自动删除旧缩略图</span>
+					<input type="hidden" name="litpic_old" value="{$row.litpic}">
+				</td>
+			</tr>
+			<tr>
+				<td>缩略图:</td>
+				<td>
+					<input type="file" name="litpic" id="litpic">
+				</td>
+			</tr>
+			{include file="addtb_edit"/}
+			<tr class="am-text-middle">
+				<td>点击数:</td><td><input type="text" name="click" id="click" value="{$row.click}"></td>
+			</tr>
+			<tr>
+				<td>浏览权限:</td>
+				<td>
+					<select name="arcrank" id="arcrank">
+		      	{volist name="arcranks" id="vo"}
+		        <option value="{$key}" {eq name="key" value="$row.arcrank"}selected{/eq}>{$vo}</option>
+		        {/volist}
+		      </select>
+		    </td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" name="" value="提 交" class="am-btn am-btn-primary am-btn-sm"></td>
+			</tr>
+		</tbody>
+		</table>
+	</form>
+</div>
+{/block}

@@ -1,0 +1,71 @@
+{extend name="common/public"/}
+{block name="content"}
+<div class="am-g">
+	<form method="post" class="am-form am-u-sm-12 admin-form">
+		<table class="am-table">
+		<tbody>
+			<tr>
+				<td style="width:100px;">用户组名:</td><td><input type="text" name="title" value="{$row.title|htmlspecialchars}"></td>
+			</tr>
+			<tr>
+				<td>权限:</td>
+				<td>
+					<ul class="rules">
+					{php}$pid = 0;{/php}
+					{volist name="authrule" id="vo"}
+						{php}if($pid != $vo['pid']) echo '<div class="hr"></div>'; $pid = $vo['pid'];{/php}
+						<li><input class="ipt-list" type="checkbox" name="rules[]" value="{$vo.id}"> {$vo.title}</li>
+					{/volist}
+					</ul>
+					<div class="am-btn am-btn-primary am-radius am-btn-xs btn-quanxuan">全选</div>
+					<div class="am-btn am-btn-primary am-radius am-btn-xs btn-fanxuan">反选</div>
+				</td>
+			</tr>
+			<tr>
+				<td></td><td><input type="submit" name="" value="提 交" class="am-btn am-btn-primary am-btn-sm"></td>
+			</tr>
+    	</tbody>
+		</table>
+	</form>
+</div>
+<style type="text/css">
+	.rules{width:100%;overflow:hidden;border:1px solid #ccc;padding:6px;margin-bottom:5px;}
+	.rules .hr{width:100%;height:0px;clear:both;border-bottom:1px dotted #ccc;padding-top:5px;margin-bottom:5px;}
+	.rules .hr:first-child{display:none;}
+	.rules li{width:150px;float:left;height:30px;line-height:30px;padding-left:4px;list-style:none;}
+</style>
+{/block}
+{block name="js"}
+<script type="text/javascript">
+$(function(){
+	var ids = "{$row.rules}";
+	if(ids != ""){
+		ids = ids.split(",");
+		$(".ipt-list").each(function(){
+			if(contains($(this).val(), ids)) $(this).prop("checked",true);
+		});
+	}
+	
+	$(".btn-quanxuan").click(function(){
+		$(".ipt-list").prop("checked",true);
+	});
+	
+	$(".btn-fanxuan").click(function(){
+		$(".ipt-list").each(function(){
+			if($(this).prop("checked")) $(this).prop("checked",false);
+			else $(this).prop("checked",true);
+		});
+	});
+	
+	function contains(obj, arr) {
+		var i = arr.length;
+		while (i--) {
+			if (arr[i] === obj) {
+				return true;
+			}
+		}
+		return false;
+	}
+});
+</script>
+{/block}

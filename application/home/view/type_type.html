@@ -1,0 +1,42 @@
+{extend name="view/base"/}
+{block name="title"}{$_fields.typename} - {__block__}{/block}
+{block name="description"}{$_fields.description}{/block}
+{block name="keywords"}{$_fields.keywords}{/block}
+{block name="content"}
+<div class="content">
+	<div class="cateMenu">
+		<div class="cateMenutop">
+			<h1 class="cate_title">{$_fields.typename}</h1>
+			<div class="cate_right">
+				<a href="http://www.chinahtml.com/e/web?type=rss2&amp;order=0&amp;orderby=0&amp;classid=1"><img src="http://www.chinahtml.com/template/images/grss.gif" alt=""></a>
+			</div>
+		</div>
+		<div class="cateMenubottom">
+			<ul>
+				{my:typelist}<li><a href="{$field.typedir}">{$field.typename}</a></li>{/my:typelist}
+			</ul>
+		</div>
+	</div>
+	<div id="articletopimg"><a href="http://www.chinahtml.com" rel="external" target="_blank"><script type="text/javascript"><!--
+		var m=4; //随机显示图片的总数量 
+		var n=Math.floor(Math.random()*m+1) 
+		document.write ("<img src='http://www.chinahtml.com/images/a/jishu"+n+".jpg' alt='' />"); 
+		//--></script></a>
+	</div>
+	<div class="cl mainleft">
+		{my:typelist id="vo" index="tindex"}
+		<div class="news_1">
+			<div class="listtop">
+				<h2><a href="{$vo.typedir}">{$vo.typename}</a></h2>
+				<span><a href="{$vo.typedir}">更多</a></span>
+			</div>
+			<ul class="list">
+				{my:arclist name="vo" row="8"}
+				<li><span>({$field.addtime|date="Y-m-d"})</span><a href="{$field.url}">{$field.title}</a></li>
+				{/my:arclist}
+			</ul>
+		</div>
+		{/my:typelist}
+	</div>
+</div>
+{/block}

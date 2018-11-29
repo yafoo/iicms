@@ -1,0 +1,38 @@
+{extend name="common/public"/}
+{block name="content"}
+<div class="am-g">
+  <div class="am-u-sm-12">
+  	<table class="am-table admin-table">
+  		<thead>
+	  		<tr>
+	  			<th style="width:70px;">ID</th>
+	  			<th>模型名字</th>
+	  			<th>模型表</th>
+	  			<th>独立模型</th>
+	  			<th>状态</th>
+	  			<th style="width:150px;">操作</th>
+	  		</tr>
+  		</thead>
+  		<tbody>
+	  		{volist name="rows" id="vo"}
+	  		<tr>
+	  			<td>{$vo.id}</td>
+	  			<td>{$vo.cname}</td>
+	  			<td>{$vo.addtable}</td>
+	  			<td>{$vo.related ? '<span style="color:green;">关联</span>' : '<span style="color:red;">独立</span>'}</td>
+	  			<td>{$vo.state ? '正常' : '停用'}</td>
+	  			<td><a href="{:url('fields/index',['cid'=>$vo.id])}">字段</a> &nbsp;&nbsp;&nbsp;<a href="{:url('edit',['id'=>$vo.id])}">编辑</a> &nbsp;&nbsp;&nbsp;<a href="{:url('del',['id'=>$vo.id])}" onClick="delcfm()">删除</a></td>
+	  		</tr>
+	  		{/volist}
+	  		<tr>
+	  			<td colspan="7"><a class="am-btn am-btn-primary am-radius am-btn-sm" href="{:url('add')}">新增模型</a> <span style="color:red;float:right;height:32px;line-height:32px;">注意：删除模型将会自动删除模型对应的文档、栏目及数据表！</span></td>
+	  		</tr>
+	  		<tr>
+	  			<td colspan="10"><span class="admin-page-info">共{$rows->lastPage()}页/{$rows->total()}条记录</span>
+	  				{$rows->render()|raw}</td>
+	  		</tr>
+  		</tbody>
+  	</table>
+  </div>
+</div>
+{/block}

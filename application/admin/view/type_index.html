@@ -1,0 +1,40 @@
+{extend name="common/public"/}
+{block name="content"}
+<div class="am-g">
+  <div class="am-u-sm-12">
+  	<table class="am-table admin-table">
+  		<thead>
+	  		<tr>
+	  			<th style="width:70px;">栏目ID</th>
+	  			<th>栏目名字</th>
+	  			<th>栏目目录</th>
+	  			<th>栏目模型</th>
+	  			<th>页面类型</th>
+	  			<th>是否隐藏</th>
+	  			<th>排序</th>
+	  			<th style="width:150px;">操作</th>
+	  		</tr>
+  		</thead>
+  		<form name='form1' method='post' action='{:url('sort')}'>
+  		<tbody>
+	  		{volist name="type" id="vo"}
+	  		<tr>
+	  			<td>{$vo.id}</td>
+	  			<td><span class="admin-level-{$vo.level}">├─</span>{$vo.typename}</td>
+	  			<td>{$vo.typedir}</td>
+	  			<td>{$vo.wchannel.cname}</td>
+	  			<td>{eq name="vo.pagetype" value="3"}大封面{/eq}{eq name="vo.pagetype" value="2"}小封面{/eq}{eq name="vo.pagetype" value="1"}栏目列表{/eq}</td>
+	  			<td>{$vo.ishidden ? '隐藏' : '显示'}</td>
+	  			<td><span class="admin-level-{$vo.level}">├─</span><input type='text' name='sortrank{$vo.id}' value='{$vo.sortrank}' style='width:25px;height:20px'</td>
+	  			<td><a href="{:url('edit',['id'=>$vo.id])}">编辑</a> &nbsp;&nbsp;&nbsp;<a href="{:url('add',['id'=>$vo.id])}">新增</a> &nbsp;&nbsp;&nbsp;<a href="{:url('del',['id'=>$vo.id])}" onClick="delcfm()">删除</a></td>
+	  		</tr>
+	  		{/volist}
+	  		</form>
+	  		<tr>
+	  			<td colspan="7"><a class="am-btn am-btn-primary am-radius am-btn-sm" href="{:url('add')}">新增栏目</a> <button class="am-btn am-btn-primary am-radius am-btn-sm" onClick="document.form1.submit();">栏目排序</button></td>
+	  		</tr>
+  		</tbody>
+  	</table>
+  </div>
+</div>
+{/block}

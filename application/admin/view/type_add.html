@@ -1,0 +1,78 @@
+{extend name="common/public"/}
+{block name="content"}
+<div class="am-g">
+  <form method="post" class="am-form am-u-sm-12 admin-form">
+    <table class="am-table">
+		<tbody>
+    	<tr>
+				<td style="width:100px;">频道模型:</td>
+				<td>
+					<select name="channelid" id="channelid">
+		      	{volist name="channel" id="vo"}
+		        <option value="{$vo.id}">{$vo.cname}</option>
+		        {/volist}
+		      </select>
+				</td>
+			</tr>
+    	
+    	<tr>
+				<td>上级栏目:</td>
+				<td>
+					<select name="pid" id="pid">
+		      	<option value="0">顶级栏目</option>
+		      	{volist name="typelist" id="vo"}
+		        <option value="{$vo.id}" {eq name="vo.id" value="$pid"}selected{/eq}>{for start="2" end="$vo.level"}　{/for}{gt name="vo.level" value="1"}├─{/gt}{$vo.typename}</option>
+		        {/volist}
+		      </select>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>栏目名字:</td><td><input type="text" name="typename" id="typename" value=""></td>
+			</tr>
+			
+			<tr>
+				<td>栏目目录:</td><td><input type="text" name="typedir" id="typedir" value=""></td>
+			</tr>
+			
+			<tr>
+				<td>关键词:</td><td><input type="text" name="keywords" id="keywords" value=""></td>
+			</tr>
+			
+			<tr>
+				<td>SEO标题:</td><td><input type="text" name="seotitle" id="seotitle" value=""></td>
+			</tr>
+			
+			<tr>
+				<td>栏目简介:</td><td><textarea name="description" rows="3" id="description"></textarea></td>
+			</tr>
+			
+			<tr>
+				<td>是否隐藏:</td>
+				<td>
+					<label class="am-radio-inline"><input type="radio" name="ishidden" value="0" checked> 否</label>
+					<label class="am-radio-inline"><input type="radio" name="ishidden" value="1"> 是</label>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>页面类型:</td>
+				<td>
+					<label class="am-radio-inline"><input type="radio" name="pagetype" value="3"> 大封面</label>
+					<label class="am-radio-inline"><input type="radio" name="pagetype" value="2"> 小封面</label>
+					<label class="am-radio-inline"><input type="radio" name="pagetype" value="1" checked> 栏目列表</label>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>栏目内容:</td><td><textarea name="content" rows="10" id="content"></textarea></td>
+			</tr>
+			
+			<tr>
+				<td></td><td><input type="submit" name="" value="提 交" class="am-btn am-btn-primary am-btn-sm"></td>
+			</tr>
+    </tbody>
+		</table>
+  </form>
+</div>
+{/block}

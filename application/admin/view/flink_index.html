@@ -1,0 +1,42 @@
+{extend name="common/public"/}
+{block name="content"}
+<div class="am-g">
+  <div class="am-u-sm-12">
+  	<table class="am-table admin-table">
+  		<thead>
+	  		<tr>
+	  			<th style="width:70px;">ID</th>
+	  			<th>排序</th>
+	  			<th>名字</th>
+	  			<th>网址</th>
+	  			<th>备注</th>
+	  			<th style="width:170px;">时间</th>
+	  			<th>状态</th>
+	  			<th style="width:100px;">操作</th>
+	  		</tr>
+  		</thead>
+  		<tbody>
+	  		{volist name="rows" id="vo"}
+	  		<tr>
+	  			<td>{$vo.id}</td>
+	  			<td>{$vo.sortrank}</td>
+	  			<td>{$vo.name}</td>
+	  			<td>{$vo.url}</td>
+	  			<td>{$vo.remark}</td>
+	  			<td>{$vo.addtime|date="Y-m-d H:i:s"}</td>
+	  			<td>{$vo.state ? '正常' : '禁用'}</td>
+	  			<td><a href="{:url('edit',['id'=>$vo.id])}">编辑</a> &nbsp;&nbsp;&nbsp;<a href="{:url('del',['id'=>$vo.id])}" onClick="delcfm()">删除</a></td>
+	  		</tr>
+	  		{/volist}
+	  		<tr>
+	  			<td colspan="8"><a class="am-btn am-btn-primary am-radius am-btn-sm" href="{:url('add')}">新增</a></td>
+	  		</tr>
+	  		<tr>
+	  			<td colspan="10"><span class="admin-page-info">共{$rows->lastPage()}页/{$rows->total()}条记录</span>
+	  				{$rows->render()|raw}</td>
+	  		</tr>
+  		</tbody>
+  	</table>
+  </div>
+</div>
+{/block}

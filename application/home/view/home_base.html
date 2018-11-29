@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>{block name="title"}{$Think.config.sys.webname}{/block}</title>
+	<meta name="description" content="{block name="description"}{/block}" />
+    <meta name="keywords" content="{block name="keywords"}{/block}" />
+	<link rel="stylesheet" href="/static/css/site.css">
+	{block name="css"}{/block}
+</head>
+<body>
+<div id="container">
+	{block name="header"}
+	<div class="cl gheader">
+		<div class="globaltop">
+			<div class="mainlinks">
+				<h2><a href="{$Think.config.sys.basehost}/" title="站长资讯首页">站长资讯</a></h2>
+				{my:typelist} <a href="{$field.typedir}">{$field.typename}</a>{/my:typelist}
+			</div>
+			<div class="passport" id="login"><a href="http://bbs.chinahtml.com/register.php">会员注册</a> | <a href="http://www.chinahtml.com/submit/addtrade.php" rel="external" target="_blank">信息供求发布</a> | <a href="http://www.chinahtml.com/submit/addnews.php" rel="external" target="_blank"><strong>文章投递</strong></a> | <a href="http://www.chinahtml.com/e/web/?type=rss2">RSS订阅</a> </div>
+		</div>
+		<div class="globalbtm">
+			<div class="sublinks"><a href="{$Think.config.sys.basehost}/">首页</a>{my:typelist type="top"} - <a href="{$field.typedir}">{$field.typename}</a>{/my:typelist}</div>
+			<div class="morelinks"><a href="http://www.chinahtml.com/siteinfo/sitemap.html" rel="external" target="_blank">更多</a></div>
+		</div>
+	</div>
+	{/block}
+	<div class="cl banner">
+		<div class="topad"><img src="http://www.chinahtml.com/images/n/960x60.png" width="960" height="60"></div>
+	</div>
+	<div class="cl wrap">
+		{block name="content"}{/block}
+		{block name="side"}{/block}
+	</div>
+	{block name="linker"}{/block}
+	<div class="cl wrap footer">
+		<div class="cl foot">
+			<span class="footnav">
+				<a class="firstNode" href="{$Think.config.sys.basehost}/">网站首页</a><a href="http://www.chinahtml.com/siteinfo/aboutus.html">关于我们</a><a href="http://www.chinahtml.com/siteinfo/advertisement.html" rel="nofollow">广告服务</a><a href="http://bbs.chinahtml.com/sendmessage.php" rel="external nofollow">意见反馈</a>
+			</span>
+			<span class="footright">&nbsp;</span>
+			<a class="goHome" href="#top" target="_self">返回顶部</a>
+		</div>
+		<div class="cl copyright">
+			{$Think.config.sys.powerby|raw}
+	  </div>
+	</div>
+</div>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/site.js"></script>
+{block name="js"}{/block}
+</body>
+</html>

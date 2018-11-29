@@ -1,0 +1,116 @@
+{extend name="common/public"/}
+{block name="content"}
+<div class="am-g">
+  <div class="am-u-sm-12">
+  	<table class="am-table admin-table">
+  		<thead>
+	  		<tr>
+	  			<th style="width:70px;">ID</th>
+	  			<th style="width:60px;">选择</th>
+	  			{volist name="fieldlist" id="vo"}
+				{if condition="$vo.listshow"}<th>{$vo.title}</th>{/if}
+				{/volist}
+	  			<th style="width:80px;">审核</th>
+	  			<th style="width:100px;">操作</th>
+	  		</tr>
+  		</thead>
+  		<tbody>
+	  		{volist name="rows" id="vo"}
+	  		<tr>
+	  			<td>{$vo.aid}</td>
+	  			<td><input class="ipt-list" type="checkbox" value="{$vo.aid}"></td>
+	  			{volist name="fieldlist" id="vx"}
+				{if condition="$vx.listshow"}
+				<td>
+					{if condition="in_array($vx['type'], ['radio', 'checkbox', 'select'])"}
+						{if condition="$vx['type'] == 'checkbox'"}
+							{php}
+								$check_keys = explode(',', $vo[$vx['name']]);
+								foreach($check_keys as $check_key)  echo $check_key != '' ? $vx['items'][$check_key] . ' ' : '';
+							{/php}
+						{else/}
+							{$vx['items'][$vo[$vx['name']]]}
+						{/if}
+					{else/}{$vo[$vx['name']]}{/if}
+				</td>
+				{/if}
+				{/volist}
+	  			<td>{$arcranks[$vo.status]}</td>
+	  			<td><a href="{:url('edit',['cid'=>$cid, 'id'=>$vo.aid])}">编辑</a> &nbsp;&nbsp;&nbsp;<a href="{:url('del',['cid'=>$cid, 'ids'=>$vo.aid])}" onClick="delcfm()">删除</a></td>
+	  		</tr>
+	  		{/volist}
+  		</tbody>
+  		<tfoot>
+  			<tr>
+	  			<td colspan="9">
+	  				<button class="am-btn am-btn-primary am-radius am-btn-xs btn-quanxuan">全选</button>
+	  				<button class="am-btn am-btn-primary am-radius am-btn-xs btn-fanxuan">反选</button>
+	  				
+	  				&nbsp;&nbsp;&nbsp;<div class="am-dropdown am-dropdown-up" data-am-dropdown>
+						<button class="am-btn am-btn-primary am-radius am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle>审核 <span class="am-icon-caret-up"></span></button>
+						<ul class="am-dropdown-content" style="min-width:auto;">
+							<li><a href="javascript:;" class="btn-shenhe" data-check="tuijian">审核推荐</a></li>
+							<li><a href="javascript:;" class="btn-shenhe" data-check="tongguo">审核通过</a></li>
+							<li><a href="javascript:;" class="btn-shenhe" data-check="quxiao">取消通过</a></li>
+							<li><a href="javascript:;" class="btn-shenhe" data-check="shibai">审核失败</a></li>
+						</ul>
+					</div>
+					
+	  				&nbsp;&nbsp;&nbsp;<button class="am-btn am-btn-primary am-radius am-btn-xs btn-shanchu">删除</button>
+	  			</td>
+	  		</tr>
+	  		<tr>
+	  			<td colspan="9">
+	  				<span class="admin-page-info">共{$rows->lastPage()}页/{$rows->total()}条记录</span>
+	  				{$rows->render()|raw}
+				</td>
+	  		</tr>
+  		</tfoot>
+  	</table>
+  </div>
+</div>
+{/block}
+{block name="js"}
+<script type="text/javascript">
+$(function(){
+	function getCheckedID(){
+		var ids = "";
+		$(".ipt-list:checked").each(function(){
+			ids += ids=='' ? $(this).val() : ','+$(this).val();
+		});
+		return ids;
+	}
+	
+	$(".btn-quanxuan").click(function(){
+		$(".ipt-list").prop("checked",true);
+	});
+	
+	$(".btn-fanxuan").click(function(){
+		$(".ipt-list").each(function(){
+			if($(this).prop("checked")) $(this).prop("checked",false);
+			else $(this).prop("checked",true);
+		});
+	});
+	
+	$(".btn-shenhe").click(function(){
+		var ids = getCheckedID();
+		var arr = {tuijian:'推荐', tongguo:'审核通过', quxiao:'取消审核', shibai:'设置失败'};
+		var k = $(this).data('check');
+		if(confirm("确认"+arr[k]+ids+"这些文章吗？")==false) return;
+		location = "{:url('check',['cid'=>$cid])}?check="+k+"&ids="+ids;
+	});
+	
+	$(".btn-move").click(function(){
+		var ids = getCheckedID();
+		if(confirm("确认移动"+ids+"这些文章吗？")==false) return;
+		location = "{:url('move',['cid'=>$cid])}?ids="+ids+"&type="+$(this).data('type');
+	});
+	
+	$(".btn-shanchu").click(function(){
+		var ids = getCheckedID();
+		if(confirm("确认删除"+ids+"这些文章吗？")==false) return;
+		location = "{:url('del',['cid'=>$cid])}?ids="+ids;
+	});
+});
+</script>
+{/block}

@@ -1,0 +1,263 @@
+{extend name="home/base"/}
+{block name="title"}{__block__} - 网站首页SEO标题{/block}
+{block name="description"}{$Think.config.sys.description}{/block}
+{block name="keywords"}{$Think.config.sys.keywords}{/block}
+{block name="header"}
+<div class="cl header">
+	<ul class="topnav">
+		<li class="specify"><strong>中国站长第一门户</strong></li>
+		<li class="maincat">
+			<div><a href="{$Think.config.sys.basehost}/">首页</a>{my:typelist}<span>|</span><a href="{$field.typedir}">{$field.typename}</a>{/my:typelist}</div>
+		</li>
+		<li class="member"><a href="http://bbs.chinahtml.com/" rel="external" class="red" target="_blank"><strong>站长论坛</strong></a> | <a href="http://bbs.chinahtml.com/register.php">会员注册</a></li>
+		<li class="fns"><a class="submit" rel="external" href="http://www.chinahtml.com/submit/addtrade.php" target="_blank">信息供求发布</a><a class="submit" href="http://www.chinahtml.com/submit/addnews.php">文章投递</a><a class="rss" rel="external" href="http://www.chinahtml.com/e/web/?type=rss2" target="_blank">RSS订阅</a></li>
+	</ul>
+	<div class="nav">
+		<h1><a href="http://www.chinahtml.com" title="CH站长资讯网首页">CH站长资讯网</a></h1>
+		<ul class="navmod1">
+			<li><strong><a href="http://www.chinahtml.com/news/">新闻</a></strong><a href="http://www.chinahtml.com/news/it/">业界</a><a href="http://www.chinahtml.com/news/telecom/">电信</a><a href="http://www.chinahtml.com/news/internet/">网络</a><a href="http://www.chinahtml.com/news/security/">安全</a><a href="http://www.chinahtml.com/news/game/">游戏</a><a href="http://www.chinahtml.com/news/opinion/">评论</a></li>
+			<li><strong><a href="http://www.chinahtml.com/software/">软件</a></strong><a href="http://www.chinahtml.com/software/news/">产业</a><a href="http://www.chinahtml.com/software/product/">新品</a><a href="http://www.chinahtml.com/software/scripts/">源码</a><a href="http://www.chinahtml.com/software/tech/">观察</a><a href="http://www.chinahtml.com/download/">下载</a><a href="http://www.chinahtml.com/study/">学院</a></li>
+		</ul>
+		<ul class="navmod2">
+			<li><strong><a href="http://www.chinahtml.com/management/">运营</a></strong><a href="http://www.chinahtml.com/management/1/">推广</a><a href="http://www.chinahtml.com/management/2/">策划</a><a href="http://www.chinahtml.com/management/3/">心得</a><a href="http://www.chinahtml.com/management/5/">分析</a><a href="http://www.chinahtml.com/management/4/">访谈</a></li>
+			<li><strong><a href="http://www.chinahtml.com/trade">供求</a></strong><a href="http://www.chinahtml.com/trade/host">空间</a><a href="http://www.chinahtml.com/trade/idc">主机</a><a href="http://www.chinahtml.com/trade/domain">域名</a><a href="http://www.chinahtml.com/trade/website">网站</a><a href="http://www.chinahtml.com/trade/advertisement">广告</a></li>
+		</ul>
+		<ul class="navmod3">
+			<li><a href="http://www.chinahtml.com/webdesign/">网页制作</a><a href="http://www.chinahtml.com/programming/">网络编程</a><a href="http://www.chinahtml.com/database/">数据库</a></li>
+			<li><a href="http://www.chinahtml.com/graphics/">图像设计</a><a href="http://www.chinahtml.com/network/">网络管理</a><a href="http://www.chinahtml.com/server/">服务器</a></li>
+		</ul>
+	</div>
+</div>
+{/block}
+{block name="content"}
+<div class="cl">
+	<div class="txArea">
+		<div class="resArea">
+			<div id="people">
+				<div class="people_t"><strong>特别推荐</strong></div>
+				<div class="people_c">
+					<div class="picList">
+						<ul>
+							{my:arclist flag="a" row="2"}
+							<li><img src="{$field.litpic}"><a class="pictitle" href="{$field.url}">{$field.title}</a>
+							<p>{$field.description}</p>
+							</li>
+							{/my:arclist}
+						</ul>
+					</div>
+					<div class="hengxian"></div>
+					<div class="searchbox">
+						<form class="main_search" method="post" action="">
+							<fieldset>
+								<input name="keyboard" type="text" class="main_search_text" size="25">
+								<input type="hidden" name="show" value="title">
+								<input type="hidden" name="tempid" value="1">
+								<input type="submit" class="main_search_bnt">
+							</fieldset>
+						</form>
+					</div>
+				</div>
+			</div>
+			
+			<div class="leftbox">
+				{my:typelist typeid="15" type="son" row="3"}
+	        	<h4 class="tab{$index==1?' active':''}" data-tab="#leftboxinfo_{$field.typeid}"><a href="{$field.typedir}">{$field.typename}</a></h4>
+	        	{/my:typelist}
+			</div>
+			<div class="leftboxInfo">
+				{my:typelist id="vo" typeid="15" type="son" row="3" index="i"}
+	        	<div id="leftboxinfo_{$vo.typeid}" style="display:{$i==1?'block':'none'};">
+	        		<ul class="list">
+	        			{my:arclist name="vo" row="10"}
+						<li><a href="{$field.url}">{$field.title}</a></li>
+						{/my:arclist}
+	        		</ul>
+	        	</div>
+	        	{/my:typelist}
+			</div>
+			<div class="res_b"></div>
+		</div><!--resArea-->
+		<div class="proArea">
+			<div id="proAd"><a href="http://www.chinahtml.com/coolsite"><img src="http://www.chinahtml.com/images/a/coolsite.jpg" width="460" height="113" style="display:block;"></a></div>
+			<div id="today">
+				<div class="t">今日头条</div>
+				<h1>{my:arclist flag="h" row="1"}<a href="{$field.url}">{$field.title}</a>{/my:arclist}</h1>
+				<ul class="list_two">
+					{my:arclist flag="h" row="8" offset="1"}<li><a href="{$field.url}">{$field.title}</a></li>{/my:arclist}
+				</ul>
+			</div>
+			
+			<div class="rightbox"><span class="fl"><a href="/music/">文章资讯</a> »</span> </span> <span class="fr"><a href="http://bbs.chinahtml.com/">技术论坛</a>| <a href="http://www.chinahtml.com/coolsite">网站欣赏</a></span></div>
+			<div class="rightboxInfo">
+				<div class="imgArea">
+					<div class="imgLAreapic">{my:arclist typeid="15" flag="p" row="1"}<a href="{$field.url}"><img src="{$field.litpic}"></a>{/my:arclist}</div>
+					<div class="imgRArea">
+						<ul>
+							{my:arclist typeid="15" flag="h,c" row="4"}<li>[<a href="{$field.typeurl}">{$field.typename}</a>]<a href="{$field.url}">{$field.title}</a></li>{/my:arclist}
+              			</ul>
+					</div>
+				</div>
+				<div class="textArea">
+					<ul class="list_two">
+						{my:arclist typeid="15" row="10"}<li><a href="{$field.url}">{$field.title}</a></li>{/my:arclist}
+            		</ul>
+				</div>
+			</div>
+			<div class="pro_b"></div>
+		</div><!--proArea-->
+	</div><!--txArea-->
+
+	<div class="cl sidebar">
+		<div class="sidebox hotnews">
+			<div class="hotnewsmenu">
+				<ul>
+					<li class="tab" data-tab=".hotnewsdesc1">一周热门</li>
+					<li class="tab active" data-tab=".hotnewsdesc2">一月热门</li>
+					<li class="tab" data-tab=".hotnewsdesc3">一年热门</li>
+				</ul>
+			</div>
+			<ul class="sidelist hotnewsdesc1" style="display:none;">
+				{my:arclist orderby="click" row="10" subday="7"}<li><a href="{$field.url}">{$field.title}</a></li>{/my:arclist}
+			</ul>
+			<ul class="sidelist hotnewsdesc2" style="display:block;">
+				{my:arclist orderby="click" row="10" subday="30"}<li><a href="{$field.url}">{$field.title}</a></li>{/my:arclist}
+			</ul>
+			<ul class="sidelist hotnewsdesc3" style="display:none;">
+				{my:arclist orderby="click" row="10" subday="365"}<li><a href="{$field.url}">{$field.title}</a></li>{/my:arclist}
+			</ul>
+			<div class="sidebar_b"></div>
+		</div>
+		<div class="mtop sidebox newstop">
+			<h3>精华推荐</h3>
+			<ul class="sidelist">
+				{my:arclist flag="c" row="10"}<li><a href="{$field.url}">{$field.title}</a></li>{/my:arclist}
+			</ul>
+			<div class="sidebar_b"></div>
+		</div>
+	</div><!--sidebar-->
+</div><!--wrap-->
+
+<div class="cl wrap">
+	<div class="txArea"><a href="http://www.laiidc.com" target="_blank"><img src="http://www.chinahtml.com/images/n/laiidc.jpg" width="720" height="80" style="display:block;"></a></div>
+    <div class="sidebar"><a href="http://www.elinkhost.com/" target="_blank"><img src="http://www.chinahtml.com/images/a/elinkhost.jpg" width="230" height="80" style="display:block;"></a></div>
+</div><!--wrap-->
+
+<div class="cl wrap">
+	<div class="txArea">
+		<div class="resArea">
+			<div class="leftbox">
+				{my:typelist typeid="20" type="son" row="3"}
+				<h4 class="tab{$index==1?' active':''}" data-tab="#leftboxinfo_{$field.typeid}"><a href="{$field.typedir}">{$field.typename}</a></h4>
+				{/my:typelist}
+			</div>
+			<div class="leftboxInfo">
+				{my:typelist id="vo" typeid="20" type="son" row="3" index="i"}
+				<div id="leftboxinfo_{$vo.typeid}" style="display:{$i==1?'block':'none'};">
+					<ul class="list">
+						{my:arclist name="vo" row="10"}
+						<li><a href="{$field.url}">{$field.title}</a></li>
+						{/my:arclist}
+					</ul>
+				</div>
+				{/my:typelist}
+			</div>
+			<div class="res_b"></div>
+		</div>
+		<div class="proArea">
+			<div class="rightbox"> <a href="/video/">视频影音</a> </div>
+			<div class="rightboxInfo">
+				<div class="imgArea">
+					<div class="imgLAreapic">{my:arclist typeid="20" flag="p" row="1"}<a href="{$field.url}"><img src="{$field.litpic}"></a>{/my:arclist}</div>
+					<div class="imgRArea">
+						<ul>
+							{my:arclist typeid="20" flag="h,c" row="4"}<li>[<a href="{$field.typeurl}">{$field.typename}</a>]<a href="{$field.url}">{$field.title}</a></li>{/my:arclist}
+						</ul>
+					</div>
+				</div>
+				<div class="textArea">
+					<ul class="list_two">
+						{my:arclist typeid="20" row="10"}<li><a href="{$field.url}">{$field.title}</a></li>{/my:arclist}
+					</ul>
+				</div>
+			</div>
+			<div class="pro_b"></div>
+		</div>
+		<div class="cl"></div>
+		<div class="mtop adMArea"><a href="http://typecho.org/" rel="external" target="_blank"><img src="http://www.chinahtml.com/images/a/typecho.jpg" width="720" height="80" style="display:block;"></a></div>
+	</div><!--txArea-->
+	<div class="sidebar">
+		<div class="sidebox opentime">
+			<h3>视频推荐</h3>
+			<ul class="sidelist" style="height:334px;">
+				{my:arclist typeid="20" flag="c" row="4" offset="4"}<li>[<a href="{$field.typeurl}">{$field.typename}</a>]<a href="{$field.url}">{$field.title}</a></li>{/my:arclist}
+			</ul>
+		</div>
+		<div class="sidebar_b"></div>
+	</div><!--sidebar-->
+</div><!--wrap-->
+
+<div class="cl wrap">
+	<div class="txArea">
+		<div class="resArea">
+			<div class="leftbox">
+				{my:typelist typeid="19" type="son" row="3"}
+	        	<h4 class="tab{$index==1?' active':''}" data-tab="#leftboxinfo_{$field.typeid}"><a href="{$field.typedir}">{$field.typename}</a></h4>
+	        	{/my:typelist}
+			</div>
+			<div class="leftboxInfo">
+				{my:typelist id="vo" typeid="19" type="son" row="3" index="i"}
+	        	<div id="leftboxinfo_{$vo.typeid}" style="display:{$i==1?'block':'none'};">
+	        		<ul class="list">
+	        			{my:arclist name="vo" row="10"}
+						<li><a href="{$field.url}">{$field.title}</a></li>
+						{/my:arclist}
+	        		</ul>
+	        	</div>
+	        	{/my:typelist}
+			</div>
+			<div class="res_b"></div>
+		</div>
+		<div class="proArea">
+			<div class="rightbox"><a href="/music/">音频音乐</a></div>
+			<div class="rightboxInfo">
+				<div class="imgArea">
+					<div class="imgLAreapic">{my:arclist typeid="19" flag="p" row="1"}<a href="{$field.url}"><img src="{$field.litpic}"></a>{/my:arclist}</div>
+					<div class="imgRArea">
+						<ul>
+							{my:arclist typeid="19" flag="h,c" row="4"}<li>[<a href="{$field.typeurl}">{$field.typename}</a>]<a href="{$field.url}">{$field.title}</a></li>{/my:arclist}
+              			</ul>
+					</div>
+				</div>
+				<div class="textArea">
+					<ul class="list_two">
+						{my:arclist typeid="19" row="10"}<li><a href="{$field.url}">{$field.title}</a></li>{/my:arclist}
+            		</ul>
+				</div>
+			</div>
+			<div class="pro_b"></div>
+		</div>
+    </div>
+	<div class="sidebar">
+		<div class="sidebox">
+			<h3>音乐推荐</h3>
+			<ul class="sidelist">
+				{my:arclist typeid="19" flag="c" row="4" offset="4"}<li>[<a href="{$field.typeurl}">{$field.typename}</a>]<a href="{$field.url}">{$field.title}</a></li>{/my:arclist}
+			</ul>
+		</div>
+		<div class="sidebar_b"></div>
+	</div><!--sidebar-->
+</div><!--wrap-->
+
+<div class="cl wrap">
+    <div class="txArea"><img src="http://www.chinahtml.com/images/a/hexie.jpg" width="720" height="80" style="display:block;"></div>
+    <div class="sidebar"><a href="http://www.phome.net"><img src="http://www.chinahtml.com/images/a/ecms230x90.jpg" width="230" height="80" style="display:block;"></a></div>
+</div><!--wrap-->
+{/block}
+{block name="linker"}
+<div class="cl wrap friendlinks">
+	<div>
+		<h2><span>合作媒体· 友情链接</span></h2>
+		<p>{my:flink}<a href="{$field.url}" target="_blank">{$field.name}</a>{/my:flink}</p>
+	</div>
+</div>
+{/block}

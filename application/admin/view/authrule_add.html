@@ -1,0 +1,39 @@
+{extend name="common/public"/}
+{block name="content"}
+<div class="am-g">
+	<form method="post" class="am-form am-u-sm-12 admin-form">
+		<table class="am-table">
+		<tbody>
+			<tr>
+				<td style="width:100px;">分组ID:</td><td><input type="text" name="pid" value=""></td>
+			</tr>
+			<tr>
+				<td>权限规则:</td><td><input type="text" name="name" value=""></td>
+			</tr>
+			<tr>
+				<td>规则名字:</td><td><input type="text" name="title" value=""></td>
+			</tr>
+			<tr>
+				<td>type:</td><td><input type="text" name="type" value=""></td>
+			</tr>
+			<tr>
+				<td>condition:</td><td><input type="text" name="condition" value=""></td>
+			</tr>
+			<tr>
+				<td>排序:</td><td><input type="text" name="sort" value=""></td>
+			</tr>
+			<tr>
+				<td>状态:</td>
+				<td>
+					<label class="am-radio-inline"><input type="radio" name="state" value="1" checked> 正常</label>
+					<label class="am-radio-inline"><input type="radio" name="state" value="0"> 关闭</label>
+				</td>
+			</tr>
+			<tr>
+				<td></td><td><input type="submit" name="" value="提 交" class="am-btn am-btn-primary am-btn-sm"></td>
+			</tr>
+    	</tbody>
+		</table>
+	</form>
+</div>
+{/block}

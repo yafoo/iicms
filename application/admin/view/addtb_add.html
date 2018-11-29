@@ -1,0 +1,57 @@
+			{php}$editor_js = false;{/php}
+			{volist name="fieldlist" id="vo"}
+			<tr>
+				<td style="width:100px;">{$vo.title}:</td>
+				<td>
+				{switch name="vo.type"}
+					{case value="input"}
+						<input type="text" name="{$vo.name}" value="{$vo.f_default}">
+					{/case}
+					
+					{case value="textarea"}
+						<textarea name="{$vo.name}" rows="{$vo.items.rows|default="6"}">{$vo.f_default}</textarea>
+					{/case}
+					
+					{case value="select"}
+						<select name="{$vo.name}">
+							{volist name="vo.items" id="vx"}
+							<option value="{$key}">{$vx}</option>
+							{/volist}
+						</select>
+					{/case}
+					
+					{case value="radio"}
+						{volist name="vo.items" id="vx"}
+						<label class="am-radio-inline"><input type="radio" name="{$vo.name}" value="{$key}"> {$vx}</label>
+						{/volist}
+					{/case}
+					
+					{case value="checkbox"}
+						{volist name="vo.items" id="vx"}
+						<label class="am-checkbox-inline"><input type="checkbox" name="{$vo.name}[]" value="{$key}"> {$vx}</label>
+						{/volist}
+					{/case}
+					
+					{case value="html"}
+						{if condition="$editor_js === false"}
+						{php}$editor_js = true;{/php}
+						<script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
+						<script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.min.js"></script>
+						{/if}
+						<script id="editor_{$vo.name}" name="{$vo.name}" type="text/plain" style="width:{$vo.items.width|default="100%"};height:{$vo.items.height|default="500px"};">{$vo.f_default}</script>
+						<script type="text/javascript">var ue=UE.getEditor('editor_{$vo.name}');</script>
+					{/case}
+					
+					{case value="image"}
+						<input type="file" name="{$vo.name}">
+					{/case}
+					
+					{case value="file"}
+						<input type="file" name="{$vo.name}">
+					{/case}
+					
+					{default /}
+				{/switch}
+				</td>
+			</tr>
+			{/volist}

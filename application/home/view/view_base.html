@@ -1,0 +1,42 @@
+{extend name="home/base"/}
+{block name="side"}
+<div class="side">
+	<div class="rightad" style="height:100px;"><a href="http://www.chinahtml.com/trade"><img src="http://www.chinahtml.com/images/a/trade.jpg" alt=""></a></div>
+	
+	<div class="recommand">
+		<h4>特别推荐</h4>
+		<ul>
+			{my:arclist channel="" typeid="" flag="c"}<li><span>{$field.addtime|date="m-d"}</span><a href="{$field.url}">{$field.title}</a></li>{/my:arclist}
+		</ul>
+	</div>
+	
+	<div class="cl rgtPic">
+		<h4>聚焦·观察</h4>
+		<div class="cl rgtPicWrapper">
+			{my:arclist typeid="" flag="p" row="4"}<div class="pic_text"><a href="{$field.url}"><img src="{$field.litpic|default="/static/images/litpic.jpg"}" alt="{$field.title}"><span>{$field.title}</span></a></div>
+			{eq name="index" value="2"}</div><div class="cl rgtPicWrapper">{/eq}{/my:arclist}
+		</div>
+	</div>
+	
+	<div class="rgtTitle">
+		<ul>
+			<li class="tab" data-tab="#tab_1">
+				<h4>今天点击最高的新闻</h4>
+			</li>
+			<li class="tab active" data-tab="#tab_2">
+				<h4>一周点击最多的新闻</h4>
+			</li>
+		</ul>
+	</div>
+	<div class="rgtContent" id="tab_1" style="display:none;">
+		<ul>
+			{my:arclist typeid="" orderby="click"}<li><span>{$field.addtime|date="m-d"}</span><a href="{$field.url}">{$field.title}</a></li>{/my:arclist}
+		</ul>
+	</div>
+	<div class="rgtContent" id="tab_2" style="display:block;">
+		<ul>
+			{my:arclist typeid="" orderby="click"}<li><span>{$field.addtime|date="m-d"}</span><a href="{$field.url}">{$field.title}</a></li>{/my:arclist}
+		</ul>
+	</div>
+</div>
+{/block}

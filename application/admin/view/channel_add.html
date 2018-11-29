@@ -1,0 +1,34 @@
+{extend name="common/public"/}
+{block name="content"}
+<div class="am-g">
+	<form method="post" class="am-form am-u-sm-12 admin-form">
+		<table class="am-table">
+		<tbody>
+			<tr>
+				<td style="width:100px;">模型名字:</td><td><input type="text" name="cname" id="cname" value=""></td>
+			</tr>
+			<tr>
+				<td>模型表:</td><td><input type="text" name="addtable" id="addtable" value=""><span style="color:red;">格式：add_tablename</span></td>
+			</tr>
+			<tr>
+				<td>关联模型:</td>
+				<td>
+					<label class="am-radio-inline"><input type="radio" name="related" value="1"> 关联</label>
+					<label class="am-radio-inline"><input type="radio" name="related" value="0" checked> 独立</label>
+				</td>
+			</tr>
+			<tr>
+				<td>状态:</td>
+				<td>
+					<label class="am-radio-inline"><input type="radio" name="state" value="0"> 停用</label>
+					<label class="am-radio-inline"><input type="radio" name="state" value="1" checked> 正常</label>
+				</td>
+			</tr>
+			<tr>
+				<td></td><td><input type="submit" name="" value="提 交" class="am-btn am-btn-primary am-btn-sm"></td>
+			</tr>
+    </tbody>
+		</table>
+	</form>
+</div>
+{/block}

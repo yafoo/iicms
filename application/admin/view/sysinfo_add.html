@@ -1,0 +1,27 @@
+{extend name="common/public"/}
+{block name="content"}
+<div class="am-g">
+	<form method="post" class="am-form am-u-sm-12 admin-form">
+		<input type="hidden" name="class" value="self">
+		<table class="am-table">
+		<tbody>
+			<tr>
+				<td style="width:100px;">参数名:</td><td><input type="text" name="name" value=""></td>
+			</tr>
+			<tr>
+				<td>参数值:</td><td><textarea name="content" rows="4"></textarea></td>
+			</tr>
+			<tr>
+				<td>参数说明:</td><td><input type="text" name="title" value=""></td>
+			</tr>
+			<tr>
+				<td>参数类型:</td><td><input type="text" name="type" value="input"> input或textarea</td>
+			</tr>
+			<tr>
+				<td></td><td><input type="submit" name="" value="提 交" class="am-btn am-btn-primary am-btn-sm"></td>
+			</tr>
+    	</tbody>
+		</table>
+	</form>
+</div>
+{/block}

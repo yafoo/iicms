@@ -1,0 +1,53 @@
+{extend name="common/public"/}
+{block name="content"}
+<div class="am-g">
+	<form method="post" class="am-form am-u-sm-12 admin-form">
+	<table class="am-table">
+		<thead>
+			<tr>
+	  			<th colspan="4" class="cfg_tab" style="border:0px;"><span data-item=".web" class="hover">站点设置</span><span data-item=".mail">邮件设置</span><span data-item=".other">其他设置</span><span data-item=".self">自定义参数</span></th>
+	  		</tr>
+  		</thead>
+		<tbody>
+			{volist name="sysinfo" id="vo"}
+			<tr class="{$vo.class}">
+				<td style="width:150px;text-align:right;">{$vo.title}:</td>
+				<td>
+					{switch name="vo.type"}
+						{case value="textarea"}<textarea name="{$vo.name}" rows="6">{$vo.content}</textarea>{/case}
+						{default /}<input type="text" name="{$vo.name}" value="{$vo.content}">
+					{/switch}
+
+				</td>
+				<td>{$vo.name}</td>
+				<td>{eq name="vo.class" value="self"}<a class="am-btn am-btn-primary am-radius am-btn-xs" href="{:url('admin/sysinfo/edit',['id'=>$vo.id])}">编辑</a> <a class="am-btn am-btn-primary am-radius am-btn-xs" href="{:url('admin/sysinfo/del',['id'=>$vo.id])}" onClick="delcfm()">删除</a>{/eq}</td>
+			</tr>
+			{/volist}
+			<tr>
+				<td></td><td><input type="submit" name="" value="保 存" class="am-btn am-btn-primary am-btn-sm"> <a class="am-btn am-btn-primary am-radius am-btn-sm self" href="{:url('admin/sysinfo/add')}" style="display:inline-block;">新增自定义参数</a></td><td></td><td></td>
+			</tr>
+		</tbody>
+	</table>
+	</form>
+</div>
+{/block}
+{block name="css"}
+<style type="text/css">
+	.cfg_tab{text-align:center;}
+	.cfg_tab span{display:inline-block;padding:3px 30px;border-bottom:3px solid #ccc;cursor:pointer;}
+	.cfg_tab span.hover{border-color:#0e90d2;color:#0e90d2;}
+	.mail,.other,.self{display:none;}
+</style>
+{/block}
+{block name="js"}
+<script type="text/javascript">
+	$(".am-btn.self").hide();
+	$(".cfg_tab span").click(function(){
+		$(this).addClass("hover").siblings().each(function(){
+			$(this).removeClass("hover");
+			$($(this).data("item")).hide();
+		});
+		$($(this).data("item")).show();
+	});
+</script>
+{/block}

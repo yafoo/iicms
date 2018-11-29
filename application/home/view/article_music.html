@@ -1,0 +1,59 @@
+{extend name="view/base"/}
+{block name="title"}资讯内容 - {__block__}{/block}
+{block name="description"}{$_fields.description}{/block}
+{block name="keywords"}{$_fields.keywords}{/block}
+{block name="content"}
+<div class="content">
+	<div class="articleplace"> 您现在正在浏览：<a href="http://www.yafu.me/">首页</a>{$place|raw}</div>
+	<div id="articletopimg"><a href="http://www.chinahtml.com" rel="external" target="_blank"><script type="text/javascript"><!--
+		var m=4; //随机显示图片的总数量 
+		var n=Math.floor(Math.random()*m+1) 
+		document.write ("<img src='http://www.chinahtml.com/images/a/jishu"+n+".jpg' alt='' />"); 
+		//--></script></a>
+	</div>
+	<div id="article">
+		<div id="entry">
+			<div id="entrytitle">
+				<h1>{$_fields.title}</h1>
+				<div id="entrymeta"><span>作者</span>:{$_fields.writer}<span>时间</span>:{$_fields.addtime|date="Y-m-d"}<span>来源</span>:{$_fields.source}<span>阅读</span>:{$_fields.click}</div>
+			</div>
+			<div class="clear"></div>
+			<div id="entrybody">
+				<iframe frameborder="0" width="300" height="100" src="{$_fields.murl}" allowfullscreen></iframe>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div id="toollinks">
+			<a href="/e/pl?classid=15&amp;id=19324" rel="nofollow">网友评论</a><a href="/e/member/fava/add?classid=15&amp;id=19324" rel="nofollow">加入收藏</a><a href="/e/doprint?classid=15&amp;id=19324" rel="nofollow">打印本文</a><a href="/e/downsys/report?classid=15&amp;id=19324" rel="nofollow">内容报错</a><a href="http://bbs.chinahtml.com">论坛讨论</a><a href="javascript:window.close()">关闭此页</a>
+		</div>
+		<div id="rules">
+			<ul>
+				<li>站长资讯刊登此文只为传递信息，并不表示赞同或者反对作者观点。</li>
+				<li>如果此内容给您造成了负面影响或者损失，本站不承担任何责任。</li>
+				<li>如果内容涉及版权问题，请及时与我们取得联系。</li>
+			</ul>
+			<div class="diggArea">
+				<div class="diggNum" id="digg">100</div>
+				<div class="diggLink"><a href="JavaScript:makeRequest('http://www.chinahtml.com/e/public/digg/?classid=15&id=19324&dotop=1&doajax=1&ajaxarea=digg','EchoReturnedText','GET','');">顶一下</a></div>
+			</div>
+		</div>
+		<div id="otherentry">
+			<div id="prv"> 上一篇：<a href="{$prev.url|default="#"}">{$prev.title|default="没有了"}</a></div>
+			<div id="next"> 下一篇：<a href="{$next.url|default="#"}">{$next.title|default="没有了"}</a></div>
+		</div>
+	</div>
+	<div class="cl relatedarticle">
+		<h2>相关文章</h2>
+		<ul>
+			{my:arclist keywords="like"}<li><a href="{$field.url}">{$field.title}</a></li>{/my:arclist}
+		</ul>
+	</div>
+	<div class="cl articlepicbox">
+		<h2>精彩图文</h2>
+		<ul class="pic_item">
+			{my:arclist typeid="" flag="p" row="8"}<li><a href="{$field.url}"><img src="{$field.litpic|default="/static/images/litpic.jpg"}" alt="{$field.title}">{$field.title}</a></li>
+			{eq name="index" value="4"}</ul><ul class="pic_item">{/eq}{/my:arclist}
+		</ul>
+	</div>
+</div>
+{/block}

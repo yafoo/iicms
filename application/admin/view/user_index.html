@@ -1,0 +1,49 @@
+{extend name="common/public"/}
+{block name="content"}
+<div class="am-g">
+  <div class="am-u-sm-12">
+  	<table class="am-table admin-table sptable">
+  		<thead>
+	  		<tr>
+	  			<th style="width:70px;">ID</th>
+	  			<th>头像</th>
+	  			<th>用户</th>
+	  			<th>昵称</th>
+	  			<th style="width:170px;">登录时间</th>
+	  			<th style="width:170px;">注册时间</th>
+	  			<th>登录IP</th>
+	  			<th>注册IP</th>
+	  			<th>状态</th>
+	  			<th style="width:100px;">操作</th>
+	  		</tr>
+  		</thead>
+  		<tbody>
+	  		{volist name="rows" id="vo"}
+	  		<tr>
+	  			<td>{$vo.id}</td>
+	  			<td><img src="{$vo.face}" style="height:42px;" /></td>
+	  			<td>{$vo.user}</td>
+	  			<td>{$vo.nickname}</td>
+	  			<td>{$vo.logintime|date="Y-m-d H:i:s"}</td>
+	  			<td>{$vo.addtime|date="Y-m-d H:i:s"}</td>
+	  			<td>{$vo.loginip}</td>
+	  			<td>{$vo.ip}</td>
+	  			<td>{$vo.state==1 ? '正常' : '关闭'}</td>
+	  			<td><a href="{:url('edit',['id'=>$vo.id])}">编辑</a> &nbsp;&nbsp;&nbsp;<a href="{:url('del',['id'=>$vo.id])}" onClick="delcfm()">删除</a></td>
+	  		</tr>
+	  		{/volist}
+	  		<tr>
+	  			<td colspan="10"><a class="am-btn am-btn-primary am-radius am-btn-sm" href="{:url('add')}">添加用户</a></td>
+	  		</tr>
+	  		<tr>
+	  			<td colspan="10"><span class="admin-page-info">共{$rows->lastPage()}页/{$rows->total()}条记录</span>
+	  				{$rows->render()|raw}</td>
+	  		</tr>
+  		</tbody>
+  	</table>
+  </div>
+</div>
+<style type="text/css">
+	table.sptable tbody tr td{vertical-align: middle;}
+</style>
+{/block}

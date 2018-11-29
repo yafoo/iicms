@@ -1,0 +1,45 @@
+{extend name="common/public"/}
+{block name="content"}
+<div class="am-g">
+  <div class="am-u-sm-12">
+  	<table class="am-table admin-table">
+  		<thead>
+	  		<tr>
+	  			<th style="width:70px;">ID</th>
+	  			<th>标题</th>
+	  			<th>大小</th>
+	  			<th>上传者</th>
+	  			<th style="width:170px;">上传时间</th>
+	  			<th>状态</th>
+	  			<th style="width:70px;">操作</th>
+	  		</tr>
+  		</thead>
+  		<tbody>
+	  		{volist name="upload" id="vo"}
+	  		<tr>
+	  			<td>{$vo.id}</td>
+	  			<td><a href="{$vo.url}" target="blank" title="{$vo.title}">{$vo.title}</a></td>
+	  			<td>{$vo.filesize|format_bytes}</td>
+	  			<td>{$vo.user.nickname}</td>
+	  			<td>{$vo.addtime|date="Y-m-d H:i:s"}</td>
+	  			<td>{$vo.state ? '<span style="color:green">使用中</span>' : '<span style="color:red">未使用</span>'}</td>
+	  			<td><a href="{:url('del',['id'=>$vo.id])}" onClick="delcfm()">删除</a></td>
+	  		</tr>
+	  		{/volist}
+	  		<tr>
+	  			<td colspan="7"><a class="am-btn am-btn-primary am-radius am-btn-sm upfile">上传文件</a></td>
+	  		</tr>
+	  		<tr>
+	  			<td colspan="7"><span class="admin-page-info">共{$upload->lastPage()}页/{$upload->total()}条记录</span>
+	  				{$upload->render()|raw}</td>
+	  		</tr>
+  		</tbody>
+  	</table>
+  </div>
+</div>
+{/block}
+{block name="js"}
+<script>
+	$(".upfile").ajaxFile({"upurl":"{:url('upFile')}","upname":"upfile", "callback":function(){self.history.go(0);}});
+</script>
+{/block}

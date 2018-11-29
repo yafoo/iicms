@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>后台管理中心</title>
+	<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+	<!--<link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.0/css/amazeui.min.css">-->
+	<link rel="stylesheet" href="/static/css/amazeui.min.css">
+	<link rel="stylesheet" href="/static/css/admin.css">
+</head>
+<body style="height:100%;overflow:hidden;">
+<header class="am-topbar am-topbar-fixed-top">
+	<div class="am-topbar-brand">
+		<strong>II</strong><small>CMS</small>
+	</div>
+  <div class="am-topbar-right">
+  	<div class="am-dropdown" data-am-dropdown>
+	    <a href="javascript:;" class="am-dropdown-toggle am-icon-user" data-am-dropdown-toggle> {$admin_nickname} <i class="am-icon-caret-down"></i></a>
+	    <ul class="am-dropdown-content">
+				<li><a href="#" class="am-icon-user"> 资料</a></li>
+				<li><a href="#" class="am-icon-cog"> 设置</a></li>
+				<li><a href="{:url('login/logout')}" class="am-icon-power-off"> 退出</a></li>
+			</ul>
+		</div>
+    <a href="/" class="am-icon-desktop" target="blank"> 访问前台</a>
+    <a href="javascript:;" class="am-icon-arrows-alt" id="admin-fullscreen"> 开启全屏</a>
+  </div>
+</header>
+<div class="am-g">
+	<div class="admin-aside">
+		<div class="aside-title"><a href="{:url('welcome')}" target="main"><i class="am-icon-home"></i> 系统主页</a></div>
+		<div class="aside-bars"><i class="am-icon-sitemap"></i> 网站管理</div>
+		<ul class="am-list">
+			<li><a href="{:url('type/index')}" target="main">栏目管理</a></li>
+			<li><a href="{:url('archives/index')}" target="main">关联文档</a></li>
+			<li><a href="{:url('archives/index',['arcrank'=>0])}" target="main">待审核文档</a></li>
+			<li><a href="{:url('archives/index',['arcrank'=>-1])}" target="main">回收站文档</a></li>
+			<li><a href="{:url('upload/index')}" target="main">附件管理</a></li>
+		</ul>
+		<div class="aside-bars"><i class="am-icon-files-o"></i> 关联模型</div>
+		<ul class="am-list">
+			{volist name="menu_related" id="vo"}
+			<li><a class="am-fl" href="{:url('archives/index',['channelid'=>$vo.id])}" target="main">{$vo.cname}</a><a class="am-fr" href="{:url('archives/add',['cid'=>$vo.id])}" target="main">新增</a></li>
+			{/volist}
+		</ul>
+		<div class="aside-bars"><i class="am-icon-file-archive-o"></i> 独立模型</div>
+		<ul class="am-list">
+			{volist name="menu_single" id="vo"}
+			<li><a class="am-fl" href="{:url('single/index',['cid'=>$vo.id])}" target="main">{$vo.cname}</a><a class="am-fr" href="{:url('single/add',['cid'=>$vo.id])}" target="main">新增</a></li>
+			{/volist}
+		</ul>
+		<div class="aside-bars"><i class="am-icon-gears"></i> 模块管理</div>
+		<ul class="am-list" style="display:none;">
+			<li><a href="{:url('channel/index')}" target="main">模型管理</a></li>
+			<li><a href="{:url('flink/index')}" target="main">友情链接</a></li>
+			<li><a href="{:url('database/index')}" target="main">数据备份还原</a></li>
+		</ul>
+		<div class="aside-bars"><i class="am-icon-gear"></i> 系统管理</div>
+		<ul class="am-list" style="display:none;">
+			<li><a href="{:url('sysinfo/index')}" target="main">系统设置</a></li>
+			<li><a href="{:url('syscache/index')}" target="main">更新缓存</a></li>
+			<li><a href="{:url('user/index')}" target="main">用户管理</a></li>
+			<li><a href="{:url('authgroup/index')}" target="main">用户组管理</a></li>
+			<li><a href="{:url('authrule/index')}" target="main">权限规则管理</a></li>
+		</ul>
+	</div>
+	<div class="admin-main">
+		<iframe id="main" name="main" frameborder="0" src="{:url('welcome')}"></iframe>
+	</div>
+</div>
+<!--<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdn.amazeui.org/amazeui/2.7.0/js/amazeui.min.js"></script>-->
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/amazeui.min.js"></script>
+<script src="/static/js/admin.js"></script>
+<script type="text/javascript">
+	popCreat();
+</script>
+</body>
+</html>

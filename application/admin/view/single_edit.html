@@ -1,0 +1,26 @@
+{extend name="common/public"/}
+{block name="content"}
+<div class="am-g">
+	<form method="post" class="am-form am-u-sm-12 admin-form">
+		<input type="hidden" name="cid" value="{$cid}">
+		<table class="am-table">
+		<tbody>
+			{include file="addtb_edit"/}
+			<tr>
+				<td style="width:100px;">状态:</td>
+				<td>
+					<select name="status">
+						{volist name="arcranks" id="vo"}
+						<option value="{$key}" {eq name="key" value="$row.status"}selected{/eq}>{$vo}</option>
+						{/volist}
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td></td><td><input type="submit" name="" value="提 交" class="am-btn am-btn-primary am-btn-sm"></td>
+			</tr>
+    	</tbody>
+		</table>
+	</form>
+</div>
+{/block}

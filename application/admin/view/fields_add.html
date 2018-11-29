@@ -1,0 +1,82 @@
+{extend name="common/public"/}
+{block name="content"}
+<div class="am-g">
+	<form method="post" class="am-form am-u-sm-12 admin-form">
+		<input type="hidden" name="cid" value="{$cid}">
+		<table class="am-table">
+		<tbody>
+			<tr>
+				<td style="width:100px;">名字:</td><td><input type="text" name="title" value=""></td>
+			</tr>
+			<tr>
+				<td>字段:</td><td><input type="text" name="name" value=""></td>
+			</tr>
+			<tr>
+				<td>类型:</td>
+				<td>
+					<select name="type">
+						{volist name="fieldtype" id="vo"}
+						{if condition="$key neq 'fixed'"}<option value="{$key}">{$vo}({$key})</option>{/if}
+						{/volist}
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>参数:</td>
+				<td>
+					<textarea name="item" rows="4"></textarea>
+					<p style="color:red;font-size:1.2rem;margin:0px;">
+						格式：key1=value1|key2=value2|key3=value3<br/>
+						input 可设置参数：type为text或password，默认text；<br/>
+						textarea 可设置参数：rows为数字高度，默认为6；<br/>
+						select、radio、checkbox 可设置参数：key为选项值，value为选项label，参数不能为空；<br/>
+						html 为百度编辑器，可设置参数：width、height；<br/>
+						image 为图片上传，可设置参数：缩略图width、height，默认不剪裁；<br/>
+						file 为文件上传。
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>字段类型:</td>
+				<td>
+					<label class="am-radio-inline"><input type="radio" name="f_type" value="varchar" checked> varchar</label>
+					<label class="am-radio-inline"><input type="radio" name="f_type" value="char"> char</label>
+					<label class="am-radio-inline"><input type="radio" name="f_type" value="int"> int</label>
+					<label class="am-radio-inline"><input type="radio" name="f_type" value="unint"> unint</label>
+					<label class="am-radio-inline"><input type="radio" name="f_type" value="tinyint"> tinyint</label>
+					<label class="am-radio-inline"><input type="radio" name="f_type" value="untinyint"> untinyint</label>
+					<label class="am-radio-inline"><input type="radio" name="f_type" value="text"> text</label>
+					<label class="am-radio-inline"><input type="radio" name="f_type" value="mediumtext"> mediumtext</label>
+				</td>
+			</tr>
+			<tr>
+				<td>字段长度:</td><td><input type="text" name="f_length" value=""></td>
+			</tr>
+			<tr>
+				<td>字段默认值:</td><td><input type="text" name="f_default" value=""></td>
+			</tr>
+			<tr>
+				<td>排序:</td><td><input type="text" name="sortrank" value="1"></td>
+			</tr>
+			<tr>
+				<td>后台列表:</td>
+				<td>
+					<label class="am-radio-inline"><input type="radio" name="listshow" value="0"> 隐藏</label>
+					<label class="am-radio-inline"><input type="radio" name="listshow" value="1" checked> 显示</label>
+				</td>
+			</tr>
+			<tr>
+				<td>状态:</td>
+				<td>
+					<label class="am-radio-inline"><input type="radio" name="state" value="0"> 禁用</label>
+					<label class="am-radio-inline"><input type="radio" name="state" value="1" checked> 正常</label>
+				</td>
+			</tr>
+			<tr>
+				<td></td><td><input type="submit" name="" value="提 交" class="am-btn am-btn-primary am-btn-sm"></td>
+			</tr>
+    	</tbody>
+		</table>
+	</form>
+</div>
+{/block}

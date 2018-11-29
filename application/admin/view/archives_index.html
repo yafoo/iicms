@@ -1,0 +1,198 @@
+{extend name="common/public"/}
+{block name="content"}
+<div class="am-g">
+  <div class="am-u-sm-12">
+  	<table class="am-table admin-table">
+  		<thead>
+  			<tr>
+	  			<th colspan="9">
+	  				<form class="am-form am-form-inline" method="get">
+	  					<div class="am-form-group am-form-select">
+						    <select class="am-input-sm" name="channelid">
+						      <option value="">选择频道</option>
+						      {volist name="channels" id="vo"}
+					        <option value="{$vo.id}" {php}if(isset($opts['channelid']) && $opts['channelid'] == $vo['id']) echo "selected";{/php}>{$vo.cname}</option>
+					        {/volist}
+						    </select>
+						  </div>
+						  
+	  					<div class="am-form-group am-form-select">
+						    <select class="am-input-sm" name="typeid">
+						    	<option value="">选择栏目</option>
+						    	{volist name="typelist" id="vo"}
+					        	<option value="{$vo.id}" {php}if(isset($opts['typeid']) && $opts['typeid'] == $vo['id']) echo "selected";{/php}>{for start="2" end="$vo.level"}　{/for}{gt name="vo.level" value="1"}├─{/gt}{$vo.typename}</option>
+					       		{/volist}
+						    </select>
+						  </div>
+						  
+							<div class="am-form-group">
+							  <input type="text" name="keyword" class="am-input-sm" placeholder="关键字" value="{$opts.keyword|default=''}">
+							</div>
+						  
+						  <div class="am-form-group am-form-select">
+						    <select class="am-input-sm" name="flag">
+						      <option value="">FLAG</option>
+						      {volist name="flags" id="vo"}
+						      <option value="{$key}" {php}if(isset($opts['flag']) && $opts['flag'] == $key) echo "selected";{/php}>{$vo[1]}</option>
+									{/volist}
+						    </select>
+						  </div>
+						  
+						  <div class="am-form-group am-form-select">
+						    <select class="am-input-sm" name="order">
+						      <option value="id">排序</option>
+						      <option value="uptime" {php}if(isset($opts['order']) && $opts['order'] == "uptime") echo "selected";{/php}>更新时间</option>
+						      <option value="click" {php}if(isset($opts['order']) && $opts['order'] == "click") echo "selected";{/php}>点击量</option>
+						    </select>
+						  </div>
+						  
+						  <div class="am-form-group">
+						    <input type="text" name="rows" class="am-input-sm" placeholder="每页条数" value="{$opts.rows|default=''}" style="width:72px;">
+						  </div>
+						  
+							<button type="submit" class="am-btn am-btn-primary am-radius am-btn-sm">搜索</button>
+						</form>
+	  			</th>
+	  		</tr>
+	  		<tr>
+	  			<th>ID</th>
+	  			<th style="width:60px;">选择</th>
+	  			<th>文档标题</th>
+	  			<th>发表时间</th>
+	  			<th>所属栏目</th>
+	  			<th>点击</th>
+	  			<th>审核</th>
+	  			<th>发布人</th>
+	  			<th style="width:100px;">操作</th>
+	  		</tr>
+  		</thead>
+  		<tbody>
+	  		{volist name="list" id="vo"}
+	  		<tr>
+	  			<td>{$vo.id}</td>
+	  			<td><input class="ipt-list" type="checkbox" value="{$vo.id}"></td>
+	  			<td><a href="{:url('edit',['id'=>$vo.id])}">{$vo.title}</a>{$vo.flag?=' [<span style="color:red;font-size:12px;">'.$vo['flagtext'].'</span>]'}</td>
+	  			<td>{$vo.addtime|date="Y-m-d H:i:s"}</td>
+	  			<td>{$vo.typename}</td>
+	  			<td>{$vo.click}</td>
+	  			<td>{$arcranks[$vo.arcrank]}</td>
+	  			<td>{$vo.writer}</td>
+	  			<td><a href="{:url('edit',['id'=>$vo.id])}">编辑</a> &nbsp;&nbsp;&nbsp;<a href="{$vo.url}" target="_blank">预览</a></td>
+	  		</tr>
+	  		{/volist}
+  		</tbody>
+  		<tfoot>
+  			<tr>
+	  			<td colspan="9">
+	  				<button class="am-btn am-btn-primary am-radius am-btn-xs btn-quanxuan">全选</button>
+	  				<button class="am-btn am-btn-primary am-radius am-btn-xs btn-fanxuan">反选</button>
+	  				
+	  				&nbsp;&nbsp;&nbsp;<div class="am-dropdown am-dropdown-up" data-am-dropdown>
+						<button class="am-btn am-btn-primary am-radius am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle>审核 <span class="am-icon-caret-up"></span></button>
+						<ul class="am-dropdown-content" style="min-width:auto;">
+							<li><a href="javascript:;" class="btn-shenhe">审核通过</a></li>
+							<li><a href="javascript:;" class="btn-shenhe-no">取消通过</a></li>
+						</ul>
+					</div>
+	  				
+	  				<div class="am-dropdown am-dropdown-up" data-am-dropdown>
+						<button class="am-btn am-btn-primary am-radius am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle>增加属性 <span class="am-icon-caret-up"></span></button>
+						<ul class="am-dropdown-content" style="min-width:auto;">
+							{volist name="flags" id="vo"}
+							<li><a href="javascript:;" class="btn-flag" data-flag="{$key}">{$vo[1]}</a></li>
+							{/volist}
+						</ul>
+					</div>
+					
+					<div class="am-dropdown am-dropdown-up" data-am-dropdown>
+						<button class="am-btn am-btn-primary am-radius am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle>删除属性 <span class="am-icon-caret-up"></span></button>
+						<ul class="am-dropdown-content" style="min-width:auto;">
+							{volist name="flags" id="vo"}
+							<li><a href="javascript:;" class="btn-flag-no" data-flag="{$key}">{$vo[1]}</a></li>
+							{/volist}
+						</ul>
+					</div>
+					
+					<div class="am-dropdown am-dropdown-up" data-am-dropdown>
+						<button class="am-btn am-btn-primary am-radius am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle>移动 <span class="am-icon-caret-up"></span></button>
+						<ul class="am-dropdown-content" style="min-width:auto;max-height:284px;overflow-y:scroll;">
+							{volist name="typelist" id="vo"}
+							<li><a href="javascript:;" class="btn-move" data-type="{$vo.id}">{for start="2" end="$vo.level"}　{/for}{gt name="vo.level" value="1"}├─{/gt}{$vo.typename}</a></li>
+							{/volist}
+						</ul>
+					</div>
+					
+	  				&nbsp;&nbsp;&nbsp;<button class="am-btn am-btn-primary am-radius am-btn-xs btn-shanchu">删除</button>
+	  			</td>
+	  		</tr>
+	  		<tr>
+	  			<td colspan="9">
+	  				<span class="admin-page-info">共{$list->lastPage()}页/{$list->total()}条记录</span>
+	  				{$list->render()|raw}
+				</td>
+	  		</tr>
+  		</tfoot>
+  	</table>
+  </div>
+</div>
+{/block}
+{block name="js"}
+<script type="text/javascript">
+$(function(){
+	function getCheckedID(){
+		var ids = "";
+		$(".ipt-list:checked").each(function(){
+			ids += ids=='' ? $(this).val() : ','+$(this).val();
+		});
+		return ids;
+	}
+	
+	$(".btn-quanxuan").click(function(){
+		$(".ipt-list").prop("checked",true);
+	});
+	
+	$(".btn-fanxuan").click(function(){
+		$(".ipt-list").each(function(){
+			if($(this).prop("checked")) $(this).prop("checked",false);
+			else $(this).prop("checked",true);
+		});
+	});
+	
+	$(".btn-shenhe").click(function(){
+		var ids = getCheckedID();
+		if(confirm("确认审核"+ids+"这些文章吗？")==false) return;
+		location = "{:url('check')}?ids="+ids;
+	});
+	
+	$(".btn-shenhe-no").click(function(){
+		var ids = getCheckedID();
+		if(confirm("确认取消审核"+ids+"这些文章吗？")==false) return;
+		location = "{:url('checkno')}?ids="+ids;
+	});
+	
+	$(".btn-flag").click(function(){
+		var ids = getCheckedID();
+		if(confirm("确认增加属性"+ids+"这些文章吗？")==false) return;
+		location = "{:url('flag')}?ids="+ids+"&flag="+$(this).data('flag');
+	});
+	
+	$(".btn-flag-no").click(function(){
+		var ids = getCheckedID();
+		if(confirm("确认删除属性"+ids+"这些文章吗？")==false) return;
+		location = "{:url('flagno')}?ids="+ids+"&flag="+$(this).data('flag');
+	});
+	
+	$(".btn-move").click(function(){
+		var ids = getCheckedID();
+		if(confirm("确认移动"+ids+"这些文章吗？")==false) return;
+		location = "{:url('move')}?ids="+ids+"&type="+$(this).data('type');
+	});
+	
+	$(".btn-shanchu").click(function(){
+		var ids = getCheckedID();
+		if(confirm("确认删除"+ids+"这些文章吗？")==false) return;
+		location = "{:url($Request.param.arcrank==-1?'clear':'del')}?ids="+ids;
+	});
+});
+</script>
+{/block}
