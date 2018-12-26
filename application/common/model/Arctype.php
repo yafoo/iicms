@@ -58,7 +58,7 @@ class Arctype extends Model
 		return isset(self::$cache[$tid]['typedir']) ? self::$cache[$tid]['typedir'] : '';
 	}
 	
-	public static function getName($tid)
+	public static function getTypeName($tid)
 	{
 		self::init();
 		if(!self::$cache) return '';

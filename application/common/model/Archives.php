@@ -58,7 +58,7 @@ class Archives extends Model
 	
 	public function getTypenameAttr($value,$data)
 	{
-		return Type::getName($data['typeid']);
+		return Type::getTypeName($data['typeid']);
 	}
 
 	public function setFlagAttr($value)
