@@ -8,7 +8,7 @@ class Type extends Controller
 {
 	protected $dir;
 	
-	public function _initialize()
+	protected function initialize()
 	{
 		$url = $this->request->url();
 		if($this->contains($url, '?') && !$this->contains($url, '/?')){
@@ -59,7 +59,7 @@ class Type extends Controller
 	private function contains($haystack, $needles)
 	{
 		foreach ((array) $needles as $needle) {
-			if ($needle != '' && mb_strpos($haystack, $needle) !== false) {
+			if ($needle != '' && strpos($haystack, $needle) !== false) {
 				return true;
 			}
 		}
