@@ -34,7 +34,7 @@ class Arctype extends Model
 	public static function setCache()
 	{
 		self::init();
-		$cache = '';
+		$cache = [];
 		$row = Db::name('arctype')->field('id,pid,typename,typedir,channelid,ishidden')->order('sortrank,id')->select();
 		if($row){
 			$row = unlimitedForLevel($row);
@@ -45,7 +45,7 @@ class Arctype extends Model
 				$cache[$v['id']] = $v;
 			}
 		}else{
-			$cache = '';
+			$cache = [];
 		}
 		Cache::set('type', $cache);
 		return $cache;

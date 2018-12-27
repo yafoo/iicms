@@ -42,7 +42,7 @@ class Channel extends Model
 	public static function setCache()
 	{
 		self::init();
-		$cache = '';
+		$cache = [];
 		$row = Db::name('channel')->order('id')->select();
 		if($row){
 			foreach($row as $v){
@@ -55,7 +55,7 @@ class Channel extends Model
 				$cache[$v['id']] = $v;
 			}
 		}else{
-			$cache = '';
+			$cache = [];
 		}
 		Cache::set('channel', $cache);
 		return $cache;
