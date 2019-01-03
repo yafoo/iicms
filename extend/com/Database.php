@@ -82,7 +82,7 @@ class Database{
      */
     public function create(){
         $sql  = "-- -----------------------------\n";
-        $sql .= "-- YFcms MySQL Data Transfer \n";
+        $sql .= "-- IIcms MySQL Data Transfer \n";
         $sql .= "-- \n";
         $sql .= "-- Host     : " . config('database.hostname') . "\n";
         $sql .= "-- Port     : " . config('database.hostport') . "\n";
@@ -169,8 +169,12 @@ class Database{
         return 0;
     }
 
+    /**
+     * 还原数据
+     * @param integer $start 起始行数
+     * @return mixed
+     */
     public function import($start){
-        //还原数据
         $db = \think\Db::connect();
 
         if($this->config['compress']){
