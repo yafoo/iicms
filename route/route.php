@@ -10,7 +10,7 @@
 // +----------------------------------------------------------------------
 Route::get('/', "home/Index/index");
 Route::get('view/:id$', 'home/Article/view')->pattern(['id' => '\d+'])->ext('html');
-Route::get(':name', 'home/Type/:name')->pattern(['name' => '(?!admin)(?!captcha)\w+']);
+Route::get(':name', 'home/Type/:name')->pattern(['name' => '(?!admin)(?!captcha)(?!install)\w+']);
 Route::get('captcha/[:id]', "login/captcha");
 return [
 ];
